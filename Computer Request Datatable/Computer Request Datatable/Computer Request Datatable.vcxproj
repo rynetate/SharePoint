@@ -18,11 +18,8 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Computer Request Datatable.html" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E2C77E4A-40A9-4FC5-920C-D38CAF4E3538}</ProjectGuid>
+    <ProjectGuid>{1E42DFCF-C534-44FC-903C-397AE38CB533}</ProjectGuid>
     <RootNamespace>ComputerRequestDatatable</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -112,6 +109,11 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Computer Request Datatable.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

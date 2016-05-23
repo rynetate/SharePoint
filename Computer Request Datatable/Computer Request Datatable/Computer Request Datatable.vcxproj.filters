@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Computer Request Datatable.html">
+    <None Include="Computer Request Datatable.htm">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
