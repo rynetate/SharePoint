@@ -1,11 +1,67 @@
-<HTML>
-<HEAD>
-<META NAME="GENERATOR" Content="Microsoft Visual Studio">
-<TITLE></TITLE>
-</HEAD>
-<BODY>
-    here is a body without that extra text
-    
+<script type="text/javascript" src="https://sp.samtec.com/SiteAssets/JavaScript/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://sp.samtec.com/SiteAssets/JavaScript/moment.js"></script>
 
-</BODY>
-</HTML>
+<script type="text/javascript" src="https://sp.samtec.com/SiteAssets/JavaScript/jquery.dataTables-1.10.11.min.js"></script>
+<div id="dashboard">
+    <p style="font-size:300%;">Loading&hellip;</p>
+</div>
+<style type="text/css">
+    .loading {
+    }
+</style>
+
+
+
+<head>
+    <link type="text/css" rel="stylesheet" href="https://sp.samtec.com/SiteAssets/JavaScript/jquery.dataTables-1.10.11.min.css" / >
+    <script type="text/javascript">
+ var dashboard = $('#dashboard'); jQuery(document).ready(function ($) {
+
+
+            var call = $.ajax({
+                url: _spPageContextInfo.webAbsoluteUrl + "/_api/Web/Lists/GetByTitle('Computer%20Request')/items?$select=RequestorName,Location,Request_x0020_By,ApproverName,Department,Computer_x0020_Type,Notes&$top=1000",
+                type: "GET",
+                dataType: "json",
+                headers: {
+                    Accept: "application/json;odata=verbose"
+                },
+                success: function(data) {
+                	$.each(data.d.results, function (i, item) {
+                	    item.Request_x0020_By = moment(item.Request_x0020_By).format('L');
+
+    		        });//$.each
+                },
+                error: function (xhr, status, message) {
+
+    			}//error
+            });//$.ajax
+
+
+            call.done(function (data, textStatus, jqXHR) {
+
+                $('#example').dataTable({
+                    "bDestroy": true,
+                    "bProcessing": true,
+                    "aaData": data.d.results,
+                    "aoColumns": [
+                        { "mData": "RequestorName" },
+                        { "mData": "ApproverName" },
+                        { "mData": "Computer_x0020_Type" },
+                        { "mData": "Department" },
+                        { "mData": "Location" },
+                        { "mData": "Request_x0020_By"},
+                        { "mData": "Notes" }
+
+                    ]
+                });// $.datatable
+            });//call.done
+            call.fail(function (jqXHR, textStatus, errorThrown) {
+                alert("Error retrieving Tasks: " + jqXHR.responseText);
+            });//call.fail
+            dashboard.empty();
+            tablediv.style.display = "";
+
+
+        }); </script>
+</head> <div id="tablediv"> <table cellpadding="0" cellspacing="0" border="0" class="display" id="example"> <thead> <th> Requestor</th> <th> Approver</th> <th> Computer Type</th> <th> Department</th> <th> Location</th> <th> Request By</th> <th> Notes</th> </thead > </table> </div>
+
